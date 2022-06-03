@@ -22,7 +22,10 @@ app.get('/home', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-    const data = { products }
+    const data = { 
+        title: 'List of Products',
+        products
+     }
     return res.render('products', data)
 })
 
@@ -38,7 +41,7 @@ app.post('/products', (req, res) => {
     products.push(product)
     
 
-    return res.redirect('/products')
+    return res.render('products', product)
 })
 
 
