@@ -29,6 +29,8 @@ app.post('/login', (req, res) => {
     return res.redirect(`/chat?username=${username}`)
 })
 
+app.get('/chat', (req, res) => res.render('chat'))
+
 
 
 
