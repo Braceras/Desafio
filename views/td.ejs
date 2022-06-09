@@ -15,9 +15,10 @@
 
               <tr>
                 <th scope="row"><%= home + 1 %> </th>
-                <td><%= product.name %> </td>
-                <td><%= product.price %> </td>
-                <td><%= product.img %> </td>
+                <td><%- product.id %> </td>
+                <td><%- product.name %> </td>
+                <td><%- product.price %> </td>
+                <td><img src="<%= product.img %> " width="56"/></td>
               </tr>
               <% }) %> 
             </tbody>
