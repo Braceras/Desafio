@@ -5,6 +5,12 @@ flex: 1;
 height: 1px;
 background: #eee;
 }
+
+.img-fluid{
+    width: 20rem;
+    height: 20rem;
+    margin-left: 5rem;
+}
 .h-custom {
 height: calc(100% - 73px);
 }

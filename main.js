@@ -22,6 +22,13 @@ app.get('/login', (req, res) => {
     return res.render('login')
 })
 
+app.post('/login', (req, res) => {
+    const { username } = req.body
+    users.push(username)
+
+    return res.redirect(`/chat?username=${username}`)
+})
+
 
 
 
