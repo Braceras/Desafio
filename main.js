@@ -31,7 +31,7 @@ app.post('/login', (req, res) => {
     const { username } = req.body
     users.push(username)
 
-    return res.redirect(`/chat?username=${username}`)
+    return res.redirect(`/home?username=${username}`)
 })
 
 app.get('/chat', (req, res) => res.render('chat'))
@@ -41,7 +41,7 @@ app.get('/chat', (req, res) => res.render('chat'))
 
 const products = []
 
-app.get('', (req, res) => {
+app.get('/home', (req, res) => {
     const data = {
         message: 'Welcome!'
     }

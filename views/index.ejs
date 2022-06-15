@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('./partials/head') %> 
+    <link rel="stylesheet" href="./chat.css">
     <title>Home</title>
 </head>
 <body>
@@ -15,6 +16,9 @@
                 <%- include('./form')  %> 
                 <br>
             </div>
+            <div>
+                <%- include('./chat') %> 
+            </div>
 
         </main>
         <footer>
@@ -22,6 +26,10 @@
         </footer>
 
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.3/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="./chat.js"></script>
     
 </body>
 </html>
