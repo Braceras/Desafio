@@ -16,7 +16,12 @@ app.set('views', './views')
 app.set('view engine', 'ejs')
 app.use(express.static('./public'))
 
+
+
 let users = []
+const messages = []
+
+
 
 app.get('/login', (req, res) => {
     return res.render('login')
@@ -69,4 +74,54 @@ const PORT = 8080
 
 httpServer.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
+})
+
+io.on('connection', socket => {
+    console.log('Nuevo usuario conectado');
+
+    socket.on('joinChat', (data) => {
+        const username = data.username
+        users.push({
+            id: socket.id,
+            username,
+            avatarId: Math.ceil(Math.random() * 6)
+        })
+
+        socket.emit('notification', `Bienvenido ${username}`)
+
+        socket.broadcast.emit('notification', `${username} se ha unido al chat`)
+
+        io.sockets.emit('users', users)
+    })
+
+
+    socket.on('messageInput', data => {
+        const now = new Date()
+        const user = users.find(user => user.id === socket.id)
+
+        const message = {
+            text: data,
+            time: `${now.getHours()}:${now.getMinutes()}`,
+            user
+
+        }
+
+        messages.push(message)
+
+        socket.emit('myMessage', message)
+        socket.broadcast.emit('message', message)
+         
+    })
+
+    socket.on('disconnect', reason => {
+        const user = users.find(user => user.id === socket.id)
+
+        users = users.filter(user => user.id !== socket.id)
+        
+        if(user) {
+            socket.broadcast.emit('notification', `${user.username} se ha ido del chat`)
+        }
+
+        io.sockets.emit('users', users)
+    })
 })
